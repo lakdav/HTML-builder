@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Karolina';
-  src: url('assets/fonts/Karolina-Regular.woff2') format('woff2');
+  font-family: "Karolina";
+  src: url("assets/fonts/Karolina-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   line-height: 1.5;
 }
@@ -28,10 +28,13 @@ header {
 
 header .container {
   min-height: 780px;
-  background-image: url('assets/img/header.jpg');
+  background-image: url("assets/img/header.jpg");
   background-size: cover;
   padding-top: 20px;
-  box-shadow: -150px 0 150px -100px #02160b inset, 150px 0 150px -100px #02160b inset, -100px 0 100px -90px #02160b inset, 100px 0 100px -90px #02160b inset, -50px 0 50px -40px #02160b inset, 50px 0 50px -40px #02160b inset;
+  box-shadow: -150px 0 150px -100px #02160b inset,
+    150px 0 150px -100px #02160b inset, -100px 0 100px -90px #02160b inset,
+    100px 0 100px -90px #02160b inset, -50px 0 50px -40px #02160b inset,
+    50px 0 50px -40px #02160b inset;
 }
 
 .main-nav {
@@ -62,7 +65,7 @@ header .container {
   line-height: 60px;
   color: #f7f7f7;
   text-decoration: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .list-item:hover a {
@@ -80,17 +83,17 @@ header .container {
 .logo-icon {
   width: 70px;
   height: 60px;
-  background-image: url('assets/svg/logo.svg');
+  background-image: url("assets/svg/logo.svg");
   background-size: contain;
   background-position: left center;
-  background-repeat: no-repeat;  
+  background-repeat: no-repeat;
 }
 
 .logo h1,
 .logo h2 {
   padding: 0;
   margin: 0;
-  font-family: 'Karolina';
+  font-family: "Karolina";
   font-size: 32px;
   color: #f7f7f7;
   line-height: 60px;
@@ -101,20 +104,20 @@ header .container {
 .search {
   width: 32px;
   height: 32px;
-  background-image: url('assets/svg/search.svg');
+  background-image: url("assets/svg/search.svg");
   background-size: contain;
   background-position: center center;
-  background-repeat: no-repeat;  
+  background-repeat: no-repeat;
   cursor: pointer;
 }
 
 .login {
   width: 120px;
   height: 50px;
-  border: 2px solid #cd6326;  
+  border: 2px solid #cd6326;
   border-radius: 5px;
   text-align: center;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .login:hover {
@@ -123,8 +126,8 @@ header .container {
 }
 
 .login:active {
-  background-color: #8F5515;
-  border-color: #8F5515;
+  background-color: #8f5515;
+  border-color: #8f5515;
 }
 
 .login a,
@@ -144,7 +147,7 @@ header .container {
 }
 
 .header-title::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -15px;
@@ -169,13 +172,13 @@ header .container {
   border: 0;
   outline: 0;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .header-button:hover {
-  background-color: #E4902D;
+  background-color: #e4902d;
 }
 
 .header-button:active {
-  background-color: #8F5515;
+  background-color: #8f5515;
 }
