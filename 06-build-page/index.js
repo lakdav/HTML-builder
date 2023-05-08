@@ -4,7 +4,6 @@ const {
   writeFile,
   mkdir,
   unlink,
-  rmdir,
 } = require("node:fs/promises");
 const { join, parse } = require("node:path");
 class Builder {
@@ -92,7 +91,7 @@ class Builder {
         }
       }
       for (let leaf of treeCopy) {
-        if (!tree.includes(leaf.name)) {
+        if (tree.findIndex((dirent) => dirent.name === leaf.name) === -1) {
           if (leaf.isFile()) {
             await unlink(this.path(...destination, leaf.name));
           } else {

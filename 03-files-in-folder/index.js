@@ -8,7 +8,7 @@ const filesInFolder = async (dirName, pathTo = [dirName]) => {
     const files = await readdir(createPath(...path), { withFileTypes: true });
     for (const file of files) {
       if (file.isDirectory()) {
-        filesInFolder(file.name, [...path, file.name]);
+        // filesInFolder(file.name, [...path, file.name]);
       } else {
         const st = await stat(createPath(...path, file.name));
         const { name, ext } = parse(file.name);

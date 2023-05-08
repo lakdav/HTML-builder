@@ -1,31 +1,53 @@
-const { readdir, readFile, writeFile, unlink } = require("node:fs/promises");
-const { mkdir } = require("node:fs/promises");
+const {
+  readdir,
+  readFile,
+  writeFile,
+  unlink,
+  rm,
+  mkdir,
+} = require("node:fs/promises");
 const { join } = require("node:path");
 
-const copy = async (dir, path = [`${dir}-copy`]) => {
+const createCopy = async (dir = [], copy = [`${dir}-copy`]) => {
   const createPath = (...args) => join(__dirname, ...args);
   try {
-    const tree = await readdir(createPath(dir));
-    await mkdir(createPath(...path), { recursive: true });
-    const treeCopy = await readdir(createPath(...path));
-    for (file of tree) {
-      const data = await readFile(createPath(dir, file));
-      if (!treeCopy.includes(file)) {
-        await writeFile(createPath(...path, file), data);
+    const tree = await readdir(createPath(...dir), { withFileTypes: true });
+    await mkdir(createPath(...copy), { recursive: true });
+    const treeCopy = await readdir(createPath(...copy), {
+      withFileTypes: true,
+    });
+    for (let leaf of tree) {
+      if (leaf.isDirectory()) {
+        const dirName = [...dir, leaf.name];
+        const copyName = [...copy, leaf.name];
+        createCopy(dirName, copyName);
       } else {
-        const dataCopy = await readFile(createPath(...path, file));
-        if (dataCopy.toString() !== data.toString()) {
-          await writeFile(createPath(...path, file), data);
+        const fileName = leaf.name;
+        const data = await readFile(createPath(...dir, fileName));
+        if (!treeCopy.includes(fileName)) {
+          await writeFile(createPath(...copy, fileName), data);
+        } else {
+          const dataCopy = await readFile(createPath(...copy, fileName));
+          if (dataCopy.toString() !== data.toString()) {
+            await writeFile(createPath(...copy, fileName), data);
+          }
         }
       }
     }
-    for (c of treeCopy) {
-      if (!tree.includes(c)) {
-        await unlink(createPath(...path, file));
+    for (let leaf of treeCopy) {
+      if (tree.findIndex((dirent) => dirent.name === leaf.name) === -1) {
+        if (leaf.isFile()) {
+          await unlink(createPath(...copy, leaf.name));
+        } else {
+          await rm(createPath(...copy, leaf.name), {
+            force: true,
+            recursive: true,
+          });
+        }
       }
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
-copy("files");
+createCopy(["files"]);

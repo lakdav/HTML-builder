@@ -15,8 +15,9 @@ const exitHandler = () => {
 const writeFile = async () => {
   const path = join(__dirname, "text.txt");
   try {
-    await open(path, "r");
+    const exist = await open(path, "r");
     unlink(path);
+    exist.close();
   } catch (error) {}
   const fileHandler = await open(path, "w");
   const stream = fileHandler.createWriteStream();
